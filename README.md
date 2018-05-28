@@ -4,4 +4,4 @@ MESSABIS Habib,
 BADJI Yousra ,
 HARHADE Selman, 
 ZOUILEKH Belkassem
-(le reste de exercices vous serons envoyés sur des feuilles de calcules par email)
+(le reste des exercices vous serons envoyés sur des feuilles de calcules par email)
