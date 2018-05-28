@@ -1,6 +1,31 @@
 import random as r
 import math as m
-def nouveauTas():
+def newgame():
+    global nomJ1
+    global nomJ2
+    global Score1
+    global Score2
+    global meilleurScore1
+    global meilleurScore2
+    
+    
+    nomJ1,nomJ2=("inserer","inserer")
+    Score1,Score2,meilleurScore1,meilleurScore2=0,0,0,0
+    joueur1=input("saisissez le nom du 1er joueur: ")
+    joueur2=input("saisissez le nom du 2eme joueur: ")
+    with open("load.txt",'r') as save:
+        for ligne in save:
+            if ligne.split(':')[0]==joueur1:
+                nomJ1,Score1,meilleurScore1=ligne.strip('\n').split(':')
+                
+            if ligne.split(':')[0]==joueur2:
+                nomJ2,Score2,meilleurScore2=ligne.strip('\n').split(':')
+                
+    if nomJ1=="inserer":
+        nomJ1=joueur1
+    if nomJ2=="inserer":
+        nomJ2=joueur2
+def TAS():
     return [r.randrange(5,24) for i in range(r.randrange(3,8))]
 def calculeScore(tour):
     s=0
@@ -30,36 +55,8 @@ def Top10():
                 index=i 
         print(l+1,".",List[index][0],":",smax)
         List.remove(List[index])
-             
-            
     
-def init():
-    global nomJ1
-    global nomJ2
-    global Score1
-    global Score2
-    global meilleurScore1
-    global meilleurScore2
-    
-    
-    nomJ1,nomJ2=("inserer","inserer")
-    Score1,Score2,meilleurScore1,meilleurScore2=0,0,0,0
-    joueur1=input("saisissez le nom du 1er joueur: ")
-    joueur2=input("saisissez le nom du 2eme joueur: ")
-    with open("load.txt",'r') as save:
-        for ligne in save:
-            if ligne.split(':')[0]==joueur1:
-                nomJ1,Score1,meilleurScore1=ligne.strip('\n').split(':')
-                
-            if ligne.split(':')[0]==joueur2:
-                nomJ2,Score2,meilleurScore2=ligne.strip('\n').split(':')
-                
-    if nomJ1=="inserer":
-        nomJ1=joueur1
-    if nomJ2=="inserer":
-        nomJ2=joueur2
-    
-def printGame(tas):
+def affichage(tas):
     chaine=""
     for i in range(len(tas)):
         chaine+=str(i+1)+"|"
@@ -75,8 +72,8 @@ def nbrPieceTotal(tas):
         total+=i
     return total
 def NIM():
-    tas=nouveauTas()
-    init()
+    tas=TAS()
+    newgame()
     print("Joueur1:",nomJ1,"| ancien score:",Score1,"| Meilleur Score:",meilleurScore1)
     print("Joueur2:",nomJ2,"| ancien score:",Score2,"| Meilleur Score:",meilleurScore2)
     tour=1
@@ -86,7 +83,7 @@ def NIM():
         else:
             print("Au tour de",nomJ1)
         
-        printGame(tas)
+        affichage(tas)
         print("Choisissez un tas: ")
         numTas=int(input())
         print("Choisissez un nombre de pieces: ")
